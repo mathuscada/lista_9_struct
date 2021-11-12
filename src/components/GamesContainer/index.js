@@ -1,22 +1,20 @@
 import Game from "../Game";
 import { Container } from "./styles";
-import GamePhoto from "../../assets/teste2.png"
+import { useEffect, useState } from "react";
+import {api} from "../../services/api"
 
 const GamesContainer = () => {
-    const game = {
-        photo: GamePhoto,
-        title: "The Last of Us"
-    }
+    const [games, setGames] = useState([]);
+
+    useEffect(() => {
+        api.get('/games/index').then((response) => {
+            setGames(response.data.slice(0, 6));
+        })
+    }, []);
+
     return (
         <Container>
-            <Game photo={game.photo} title={game.title}/>
-            <Game photo={game.photo} title={game.title}/>
-            <Game photo={game.photo} title={game.title}/>
-            <Game photo={game.photo} title={game.title}/>
-            <Game photo={game.photo} title={game.title}/>
-            <Game photo={game.photo} title={game.title}/>
-            
-            
+            {games.map((game) => <Game key={game.id} title={game.title} photo={game.photo_url}/>)}
         </Container>
     );
 }

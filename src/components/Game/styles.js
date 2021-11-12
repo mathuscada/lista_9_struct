@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    cursor: pointer;
     width: 16.4vw;
     margin: 0 2.5rem 1rem 2.5rem;
     img {
